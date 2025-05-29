@@ -5,6 +5,7 @@ import 'package:quotify/features/auth/view/Widgets/auth_primary_button.dart';
 import 'package:quotify/features/auth/view/Widgets/auth_social_buttons.dart';
 import 'package:quotify/features/auth/view/widgets/auth_terms_text.dart';
 import '../widgets/auth_text_field.dart';
+import 'package:flutter/gestures.dart';
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({super.key});
@@ -36,14 +37,29 @@ class _SignUpPageState extends State<SignUpPage> {
                 textAlign: TextAlign.center,
               ),
               const SizedBox(height: 10),
-              Text(
-                'Already have an account? Log in',
-                style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                      color: AppColors.primary,
-                      fontSize: 12,
-                      fontWeight: FontWeight.bold,
-                    ),
+              RichText(
                 textAlign: TextAlign.center,
+                text: TextSpan(
+                  text: 'Already have an account? ',
+                  style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                        color: Colors.white,
+                        fontSize: 12,
+                        fontWeight: FontWeight.bold,
+                      ),
+                  children: [
+                    TextSpan(
+                      text: 'Log in',
+                      style: TextStyle(
+                        color: AppColors.primary,
+                        fontWeight: FontWeight.bold,
+                      ),
+                      recognizer: TapGestureRecognizer()
+                        ..onTap = () {
+                          Navigator.pop(context);
+                        },
+                    ),
+                  ],
+                ),
               ),
               const SizedBox(height: 32),
               AuthTextField(

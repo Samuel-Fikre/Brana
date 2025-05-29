@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:quotify/core/theme/theme.dart';
+import 'package:quotify/features/auth/view/Pages/login_page.dart';
 import 'package:quotify/features/auth/view/Pages/sign_up.dart';
 
 void main() {
@@ -15,7 +16,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: AppTheme.darkTheme,
-      home: const SignUpPage(),
+      home: const LoginPage(),
     );
   }
 }
