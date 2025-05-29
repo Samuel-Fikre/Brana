@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:quotify/core/theme/app_colors.dart';
+import 'package:quotify/features/auth/view/Widgets/auth_divider.dart';
 import 'package:quotify/features/auth/view/Widgets/auth_primary_button.dart';
+import 'package:quotify/features/auth/view/Widgets/auth_social_buttons.dart';
+import 'package:quotify/features/auth/view/widgets/auth_terms_text.dart';
 import '../widgets/auth_text_field.dart';
 
 class SignUpPage extends StatefulWidget {
@@ -31,6 +35,16 @@ class _SignUpPageState extends State<SignUpPage> {
                     ),
                 textAlign: TextAlign.center,
               ),
+              const SizedBox(height: 10),
+              Text(
+                'Already have an account? Log in',
+                style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                      color: AppColors.primary,
+                      fontSize: 12,
+                      fontWeight: FontWeight.bold,
+                    ),
+                textAlign: TextAlign.center,
+              ),
               const SizedBox(height: 32),
               AuthTextField(
                 hintText: 'Email address',
@@ -46,6 +60,19 @@ class _SignUpPageState extends State<SignUpPage> {
               AuthPrimaryButton(
                 text: 'Continue',
                 onPressed: () {},
+              ),
+              const SizedBox(
+                height: 32,
+              ),
+              AuthDivider(),
+              const SizedBox(height: 24),
+              AuthSocialButtons(),
+              const SizedBox(
+                height: 200,
+              ),
+              AuthTermsText(
+                onTermsTap: () {},
+                onPrivacyTap: () {},
               ),
             ],
           ),
