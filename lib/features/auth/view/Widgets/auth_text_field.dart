@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:quotify/core/theme/app_colors.dart';
+import 'package:brana/core/theme/app_colors.dart';
 
 class AuthTextField extends StatefulWidget {
   final String hintText;
