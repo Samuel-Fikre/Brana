@@ -1,13 +1,12 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:quotify/core/theme/app_colors.dart';
+import 'package:brana/core/theme/app_colors.dart';
 
 class AuthTermsText extends StatelessWidget {
   final void Function()? onTermsTap;
   final void Function()? onPrivacyTap;
 
-  const AuthTermsText({Key? key, this.onTermsTap, this.onPrivacyTap})
-      : super(key: key);
+  const AuthTermsText({super.key, this.onTermsTap, this.onPrivacyTap});
 
   @override
   Widget build(BuildContext context) {

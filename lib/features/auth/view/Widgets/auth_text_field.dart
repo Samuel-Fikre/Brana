@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:quotify/core/theme/app_colors.dart';
+import 'package:brana/core/theme/app_colors.dart';
 
 class AuthTextField extends StatefulWidget {
   final String hintText;
@@ -7,11 +7,11 @@ class AuthTextField extends StatefulWidget {
   final TextEditingController controller;
 
   const AuthTextField({
-    Key? key,
+    super.key,
     required this.hintText,
     required this.controller,
     this.isPassword = false,
-  }) : super(key: key);
+  });
 
   @override
   State<AuthTextField> createState() => _AuthTextFieldState();

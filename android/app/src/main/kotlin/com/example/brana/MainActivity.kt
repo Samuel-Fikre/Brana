@@ -1,4 +1,4 @@
-package com.example.quotify
+package com.example.brana
 
 import io.flutter.embedding.android.FlutterActivity
 

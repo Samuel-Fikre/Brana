@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:quotify/core/theme/app_colors.dart';
-import 'package:quotify/features/auth/view/Widgets/auth_divider.dart';
-import 'package:quotify/features/auth/view/Widgets/auth_primary_button.dart';
-import 'package:quotify/features/auth/view/Widgets/auth_social_buttons.dart';
-import 'package:quotify/features/auth/view/widgets/auth_terms_text.dart';
+import 'package:brana/core/theme/app_colors.dart';
+import 'package:brana/features/auth/view/Widgets/auth_divider.dart';
+import 'package:brana/features/auth/view/Widgets/auth_primary_button.dart';
+import 'package:brana/features/auth/view/Widgets/auth_social_buttons.dart';
+import 'package:brana/features/auth/view/widgets/auth_terms_text.dart';
 import '../widgets/auth_text_field.dart';
 import 'package:flutter/gestures.dart';
 
