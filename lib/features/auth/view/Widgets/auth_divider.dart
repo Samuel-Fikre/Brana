@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:quotify/core/theme/app_colors.dart';
 
 class AuthDivider extends StatelessWidget {
-  const AuthDivider({Key? key}) : super(key: key);
+  const AuthDivider({super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:quotify/core/theme/theme.dart';
 import 'package:quotify/features/auth/view/Pages/login_page.dart';
-import 'package:quotify/features/auth/view/Pages/sign_up.dart';
 
 void main() {
   runApp(const MyApp());

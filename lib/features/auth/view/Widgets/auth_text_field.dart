@@ -7,11 +7,11 @@ class AuthTextField extends StatefulWidget {
   final TextEditingController controller;
 
   const AuthTextField({
-    Key? key,
+    super.key,
     required this.hintText,
     required this.controller,
     this.isPassword = false,
-  }) : super(key: key);
+  });
 
   @override
   State<AuthTextField> createState() => _AuthTextFieldState();

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:quotify/core/theme/app_colors.dart';
 
 class AuthSocialButtons extends StatelessWidget {
-  const AuthSocialButtons({Key? key}) : super(key: key);
+  const AuthSocialButtons({super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -6,8 +6,7 @@ class AuthTermsText extends StatelessWidget {
   final void Function()? onTermsTap;
   final void Function()? onPrivacyTap;
 
-  const AuthTermsText({Key? key, this.onTermsTap, this.onPrivacyTap})
-      : super(key: key);
+  const AuthTermsText({super.key, this.onTermsTap, this.onPrivacyTap});
 
   @override
   Widget build(BuildContext context) {
