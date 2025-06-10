@@ -1,14 +1,9 @@
 import 'package:flutter/material.dart';
-<<<<<<< HEAD
-import 'package:quotify/core/theme/theme.dart';
-import 'package:quotify/features/auth/view/Pages/login_page.dart';
-=======
 import 'package:brana/core/theme/theme.dart';
 import 'package:brana/features/auth/view/Pages/login_page.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:brana/features/pdf_reader/view/pdf_reader_page.dart';
->>>>>>> supabase
 
 void main() async {
   await dotenv.load(fileName: '.env');
