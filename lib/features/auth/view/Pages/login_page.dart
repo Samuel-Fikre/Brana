@@ -4,100 +4,37 @@ import 'package:brana/core/theme/app_colors.dart';
 import 'package:brana/features/auth/view/Pages/sign_up.dart';
 import 'package:brana/features/auth/view/Widgets/auth_primary_button.dart';
 import '../widgets/auth_text_field.dart';
-import 'package:google_sign_in/google_sign_in.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:brana/features/pdf_reader/view/pdf_reader_page.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:brana/features/auth/viewmodel/login_vm.dart';
 
-final supabase = Supabase.instance.client;
-
-class LoginPage extends StatefulWidget {
+class LoginPage extends ConsumerStatefulWidget {
   const LoginPage({super.key});
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  ConsumerState<LoginPage> createState() => _LoginPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _LoginPageState extends ConsumerState<LoginPage> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   bool rememberMe = false;
-  bool _isSigningIn = false;
-
-  // Example image asset paths (replace with your own assets)
-  final List<String> imageList = [
-    'assets/images/user1.png',
-    'assets/images/user2.png',
-    'assets/images/user3.png',
-    'assets/images/user4.png',
-    'assets/images/user5.png',
-  ];
-
-  @override
-  void initState() {
-    _setupAuthListener();
-    super.initState();
-  }
-
-  void _setupAuthListener() {
-    supabase.auth.onAuthStateChange.listen((data) {
-      final event = data.event;
-      if (event == AuthChangeEvent.signedIn) {
-        Navigator.of(context).pushReplacement(
-          MaterialPageRoute(
-            builder: (context) => const PdfReaderPage(),
-          ),
-        );
-      }
-    });
-  }
-
-  Future<void> _googleSignIn() async {
-    if (_isSigningIn) return;
-    setState(() => _isSigningIn = true);
-
-    try {
-      final GoogleSignIn googleSignIn = GoogleSignIn(
-        serverClientId: dotenv.env['GOOGLE_WEB_CLIENT_ID']!,
-      );
-      final googleUser = await googleSignIn.signIn();
-      final googleAuth = await googleUser?.authentication;
-      final accessToken = googleAuth?.accessToken;
-      final idToken = googleAuth?.idToken;
-
-      if (accessToken == null) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('No Access Token found.')),
-        );
-        debugPrint('Google sign-in failed: No Access Token found.');
-        return;
-      }
-      if (idToken == null) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('No ID Token found.')),
-        );
-        debugPrint('Google sign-in failed: No ID Token found.');
-        return;
-      }
-
-      await supabase.auth.signInWithIdToken(
-        provider: OAuthProvider.google,
-        idToken: idToken,
-        accessToken: accessToken,
-      );
-    } catch (e, stack) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Google sign-in error: $e')),
-      );
-      debugPrint('Google sign-in error: $e');
-      debugPrint('Stack trace: $stack');
-    } finally {
-      setState(() => _isSigningIn = false);
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
+    ref.listen<LoginState>(loginViewModelProvider, (previous, next) {
+      if (next.errorMessage != null &&
+          previous?.errorMessage != next.errorMessage) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(next.errorMessage!)),
+        );
+        ref.read(loginViewModelProvider.notifier).clearError();
+      }
+    });
+
+    final loginState = ref.watch(loginViewModelProvider);
+
     return Scaffold(
       body: SafeArea(
         child: Padding(
@@ -151,10 +88,8 @@ class _LoginPageState extends State<LoginPage> {
                 ],
               ),
               AuthPrimaryButton(
-                text: 'Log in',
-                onPressed: () {
-                  // TODO: Implement email/password login if you want
-                },
+                text: loginState.isLoading ? 'Loading...' : 'Log in',
+                onPressed: loginState.isLoading ? () {} : _handleLogin,
               ),
               const SizedBox(height: 16),
               ElevatedButton.icon(
@@ -171,7 +106,7 @@ class _LoginPageState extends State<LoginPage> {
                   width: 24,
                 ),
                 label: const Text('Sign in with Google'),
-                onPressed: _googleSignIn,
+                onPressed: loginState.isLoading ? null : _handleGoogleSignIn,
               ),
               const SizedBox(height: 16),
               // Image row
@@ -232,5 +167,30 @@ class _LoginPageState extends State<LoginPage> {
         ),
       ),
     );
+  }
+
+  void _handleLogin() async {
+    final email = _emailController.text.trim();
+    final password = _passwordController.text;
+
+    final viewModel = ref.read(loginViewModelProvider.notifier);
+    final success = await viewModel.loginWithEmail(email, password);
+
+    if (success) {
+      Navigator.of(context).pushReplacement(
+        MaterialPageRoute(builder: (context) => const PdfReaderPage()),
+      );
+    }
+  }
+
+  void _handleGoogleSignIn() async {
+    final viewModel = ref.read(loginViewModelProvider.notifier);
+    final success =
+        await viewModel.loginWithGoogle(dotenv.env['GOOGLE_WEB_CLIENT_ID']!);
+    if (success) {
+      Navigator.of(context).pushReplacement(
+        MaterialPageRoute(builder: (context) => const PdfReaderPage()),
+      );
+    }
   }
 }
