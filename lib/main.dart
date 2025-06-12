@@ -31,8 +31,8 @@ class MyApp extends StatelessWidget {
       theme: AppTheme.darkTheme,
       home: const LoginPage(),
       routes: {
-        '/login': (context) => LoginPage(),
-        '/library': (context) => LibraryPage(),
+        '/login': (context) => const LoginPage(),
+        '/library': (context) => const LibraryPage(),
       },
     );
   }

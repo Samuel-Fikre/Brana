@@ -77,7 +77,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                   const Spacer(),
                   GestureDetector(
                     onTap: () {},
-                    child: Text(
+                    child: const Text(
                       'Forgot Password?',
                       style: TextStyle(
                         color: AppColors.primary,
@@ -145,7 +145,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                       children: [
                         TextSpan(
                           text: 'Sign up',
-                          style: TextStyle(
+                          style: const TextStyle(
                               color: AppColors.primary,
                               fontWeight: FontWeight.bold),
                           recognizer: TapGestureRecognizer()
@@ -178,7 +178,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
 
     if (success) {
       Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (context) => LibraryPage()),
+        MaterialPageRoute(builder: (context) => const LibraryPage()),
       );
     }
   }
@@ -189,7 +189,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
         await viewModel.loginWithGoogle(dotenv.env['GOOGLE_WEB_CLIENT_ID']!);
     if (success) {
       Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (context) => LibraryPage()),
+        MaterialPageRoute(builder: (context) => const LibraryPage()),
       );
     }
   }

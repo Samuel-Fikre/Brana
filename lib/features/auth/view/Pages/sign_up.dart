@@ -64,7 +64,7 @@ class _SignUpPageState extends ConsumerState<SignUpPage> {
     final state = ref.read(signUpViewModelProvider);
     if (success && !state.emailConfirmationRequired) {
       Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (context) => LibraryPage()),
+        MaterialPageRoute(builder: (context) => const LibraryPage()),
       );
     }
   }
@@ -127,7 +127,7 @@ class _SignUpPageState extends ConsumerState<SignUpPage> {
                   children: [
                     TextSpan(
                       text: 'Log in',
-                      style: TextStyle(
+                      style: const TextStyle(
                         color: AppColors.primary,
                         fontWeight: FontWeight.bold,
                       ),
@@ -162,7 +162,7 @@ class _SignUpPageState extends ConsumerState<SignUpPage> {
                 onPressed: signUpState.isLoading ? () {} : _handleSignUp,
               ),
               const SizedBox(height: 32),
-              AuthDivider(),
+              const AuthDivider(),
               const SizedBox(height: 24),
               // Add your social sign-in buttons here if needed
               const Spacer(),

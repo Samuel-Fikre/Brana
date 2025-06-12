@@ -19,12 +19,12 @@ class AuthSocialButtons extends StatelessWidget {
         ),
         const SizedBox(width: 16),
         _SocialButton(
-          icon: Icon(Icons.apple, color: AppColors.textPrimary, size: 35),
+          icon: const Icon(Icons.apple, color: AppColors.textPrimary, size: 35),
           onTap: () => print('Apple tapped'),
         ),
         const SizedBox(width: 16),
         _SocialButton(
-          icon: Icon(Icons.facebook, color: AppColors.facebook, size: 35),
+          icon: const Icon(Icons.facebook, color: AppColors.facebook, size: 35),
           onTap: () => print('Facebook tapped'),
         ),
       ],
