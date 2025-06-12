@@ -5,7 +5,7 @@ import 'package:brana/features/auth/view/Pages/sign_up.dart';
 import 'package:brana/features/auth/view/Widgets/auth_primary_button.dart';
 import '../widgets/auth_text_field.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:brana/features/pdf_reader/view/pdf_reader_page.dart';
+import 'package:brana/features/pdf_reader/view/library_page.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:brana/features/auth/viewmodel/login_vm.dart';
 
@@ -178,7 +178,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
 
     if (success) {
       Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (context) => const PdfReaderPage()),
+        MaterialPageRoute(builder: (context) => LibraryPage()),
       );
     }
   }
@@ -189,7 +189,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
         await viewModel.loginWithGoogle(dotenv.env['GOOGLE_WEB_CLIENT_ID']!);
     if (success) {
       Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (context) => const PdfReaderPage()),
+        MaterialPageRoute(builder: (context) => LibraryPage()),
       );
     }
   }

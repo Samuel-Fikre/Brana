@@ -7,7 +7,7 @@ import 'package:brana/features/auth/view/Widgets/auth_primary_button.dart';
 import 'package:brana/features/auth/view/widgets/auth_terms_text.dart';
 import '../widgets/auth_text_field.dart';
 import 'package:flutter/gestures.dart';
-import 'package:brana/features/pdf_reader/view/pdf_reader_page.dart';
+import 'package:brana/features/pdf_reader/view/library_page.dart';
 
 class SignUpPage extends ConsumerStatefulWidget {
   const SignUpPage({super.key});
@@ -64,7 +64,7 @@ class _SignUpPageState extends ConsumerState<SignUpPage> {
     final state = ref.read(signUpViewModelProvider);
     if (success && !state.emailConfirmationRequired) {
       Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (context) => const PdfReaderPage()),
+        MaterialPageRoute(builder: (context) => LibraryPage()),
       );
     }
   }
